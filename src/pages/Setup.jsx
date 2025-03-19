@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 const Setup = () => {
   const [clientId, setClientId] = useState("");
   const [clientSecret, setClientSecret] = useState("");
-  const [redirectUri, setRedirectUri] = useState("");
+  const [accessToken, setAccessToken] = useState("");
   const navigate = useNavigate();
 
   const handleSave = () => {
-    if (!clientId || !clientSecret || !redirectUri) {
+    if (!clientId || !clientSecret || !accessToken) {
       alert("Por favor, preencha todos os campos.");
       return;
     }
@@ -16,10 +16,10 @@ const Setup = () => {
     // Salvar credenciais no localStorage
     localStorage.setItem("stravaClientId", clientId);
     localStorage.setItem("stravaClientSecret", clientSecret);
-    localStorage.setItem("stravaRedirectUri", redirectUri);
+    localStorage.setItem("stravaAccessToken", accessToken);
 
     alert("Configurações salvas com sucesso!");
-    navigate("/auth"); // Redirecionar para a autenticação
+    navigate("/auth"); // Redirecionar para a página de autenticação
   };
 
   return (
@@ -47,13 +47,13 @@ const Setup = () => {
           />
         </div>
         <div>
-          <label className="block font-semibold mb-1">Redirect URI</label>
+          <label className="block font-semibold mb-1">Access Token</label>
           <input
             type="text"
-            value={redirectUri}
-            onChange={(e) => setRedirectUri(e.target.value)}
+            value={accessToken}
+            onChange={(e) => setAccessToken(e.target.value)}
             className="w-full p-2 border rounded"
-            placeholder="Insira sua Redirect URI"
+            placeholder="Insira seu Access Token"
           />
         </div>
         <button

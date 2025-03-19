@@ -2,9 +2,9 @@ import React from "react";
 
 const Auth = () => {
   const clientId = localStorage.getItem("stravaClientId");
-  const redirectUri = localStorage.getItem("stravaRedirectUri");
+  const accessToken = localStorage.getItem("stravaAccessToken");
 
-  if (!clientId || !redirectUri) {
+  if (!clientId || !accessToken) {
     return (
       <div className="flex flex-col items-center justify-center h-screen">
         <p className="text-lg text-red-500">Por favor, configure suas credenciais primeiro.</p>
@@ -18,16 +18,15 @@ const Auth = () => {
     );
   }
 
-  const AUTH_URL = `https://www.strava.com/oauth/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=read,activity:read_all`;
-
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-2xl font-bold mb-4">Conectar ao Strava</h1>
+      <h1 className="text-2xl font-bold mb-4">Autenticação Concluída</h1>
+      <p className="text-lg text-green-500">Client ID e Access Token configurados com sucesso!</p>
       <a
-        href={AUTH_URL}
-        className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded"
+        href="/dashboard"
+        className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded mt-4"
       >
-        Iniciar Autenticação
+        Acessar Dashboard
       </a>
     </div>
   );
